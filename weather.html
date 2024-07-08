@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<!-- <!DOCTYPE html> html5的版本 -->
+<!-- html：超文本标记语言的缩写-----网页 -->
+<html lang="en">
+<!-- 头部，里面是配置网页的头部 -->
+<head>
+    <!-- 编码格式，无则乱码 -->
+    <meta charset="UTF-8">
+    <!-- 移动端适配 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 引入外部css文件 -->
+    <link rel="stylesheet" href="css/weather.css">
+    <!-- 网页标题 -->
+    <title>全球城市天气预报</title>
+</head>
+<body>
+    <!-- autoplay自动播放的前提是必须是muted静音模式下，进行loop无限循环播放 -->
+    <video autoplay muted loop src="video/a0.mp4"></video>
+    <div class="head">
+        <div class="content">
+            <div class="left">
+                全球城市天气预报
+            </div>
+            <div class="nav">
+                <ul>
+                    <li>首页</li>
+                    <li>今日天气</li>
+                    <li>更多天气</li>
+                    <li>新闻资讯</li>
+                    <li>联系我们</li>
+                </ul>
+            </div>
+            <div class="right">
+                <img src="img/adre.png" alt="">
+                <span>黑河</span>
+                <input type="text" value="黑河">
+                <button>查询</button>
+            </div>
+        </div>
+    </div>
+    <!-- 中间主要内容开始 -->
+    <div class="box">
+        <div class="weather">
+            <div class="box-top">
+                <span>黑河</span>
+                <b>今日天气 [刚刚更新]</b>
+            </div>
+            <div class="wd">
+                <p>
+                    <span class="date">xxxx-xx-xx 星期xx</span>
+                    <span class="time">xx：xx：xx</span>
+                </p>
+                <h1>
+                    <span>加载中...</span>
+                    <span>℃</span>
+                    <img src="icon/101.png" alt="">
+                </h1>
+                <p>
+                    <b>加载中...</b>
+                </p>
+                <div class="row">
+                    <div>
+                        <span>天气：</span>
+                        <span class="qing">加载中...</span>
+                    </div>
+                    <div>
+                        <span>湿度：</span>
+                        <span class="shidu">加载中...</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div>
+                        <span>风向：</span>
+                        <span class="fengxiang">加载中...</span>
+                    </div>
+                    <div>
+                        <span>风力等级：</span>
+                        <span class="fengli">加载中...</span>
+                    </div>
+                </div>
+                <h3>温馨提示</h3>
+                <div class="desc">
+                    加载中...
+                    <!-- 穿衣指数：天气寒冷，建议穿着羽绒服、大皮衣服，年老体弱注意保暖 -->
+                </div>
+            </div>
+        </div>
+        <!-- 第二部 写一个容器用来放echarts图表，第三步 设置宽高 -->
+        <div id="main"></div>
+    </div>
+    <!-- 中间主要内容结束 -->
+    <div class="footer">
+        温丹娜工作室权所有©，违法必究，数据来源：和风天气
+    </div>
+    <!-- 模态框 -->
+    <div class="matter">
+        <div class="matter-main">
+            <div class="matter-head">
+                <h3>未来七天天气状况</h3>
+                <span>X</span>
+            </div>
+            <!-- echarts图表 -->
+            <div id="matter"></div>
+        </div>
+    </div>
+</body>
+</html>
+<!-- 第一步 引入echarts框架 -->
+<!-- 因为index.js中先调用了echarts方法，所以一定是先引入echarts后引入index.js -->
+<script src="js/echarts.min.js"></script>
+<script src="js/weather.js"></script>
+<script src="js/time.js"></script>
+<script src="js/matter.js"></script>
+<!-- 
+快捷键
+    h1{标题内容} + tab		 创建的标签包含内部的内容
+    h1{标题内容}*10 + tab	 创建10个这样的标签包含内容h1
+    h1{$}*10 + tab			$代表序号1-10，$$代表01-10，$$$代表001-101，$ $ $代表1 1 1
+    h1+h2+h3 + tab 		    列出h1到h3
+    div>p*2 +tab			div嵌套2个p
+    div#idname + tab      	创建具有id的元素 <div id="idname"></div>
+    (tr>td*4)*4 + tab 		将()内部的元素创建四遍
+ -->
+ <!-- 
+    sublime text
+    一般的软件公司：
+        全栈工程师（前后端通吃）1个
+        前端开发工程师：网页（适配）、后台管理系统、app、小程序、可视化大屏（适配）...话画面，最开始的时候是一张静态的图片，
+        这个图片是ui设计师给的，前端将这个ui图变成动态的。
+        主流框架以vue为主、以react为辅
+        后端开发工程师：维护数据、实现增删改查的功能，java
+        UI设计师：网站设计图、海报...
+        产品经理：对接需求，甲方（毕设）想要做个什么东西，首先先跟产品对接，画原型图----狗都能当
+        测试和运维：测试专门找bug，运维保证项目正常运行 
+    
+    流程：甲方先找到产品经理画原型图---》UI设计师画图---》前端把静态图变成动态
+    ---》对接后端数据---》测试bug---》上线，运维维护系统运行
+    
+    学习路线：
+    1.html
+    2.css
+    3.css3
+    *4.js
+    5.jq
+    6.layui / bootstrap （老项目）
+    7.H5
+    8.移动端，就是手机端页面，媒体查询，适配响应式页面
+    *9.ES6---2015/ES7---2016/8/9/10/ES2023/ES2024
+    *10.nodejs + express + mysql 前端的后端，轻量级（聊天室websapeid）1个多月
+    11.vue2.0 + ElementUi + Ant 框架---尤雨溪---谷歌2012---send.js---》vue---》2016年火
+    *12.（工具：项目共享）git、svn、小乌龟（拉取，上传，合并，提交...)、禅道分配任务、蓝湖（ui图）
+    13.原始微信小程序---张小龙---2014
+    14.uniapp（一套代码打包成若干个不同平台的应用，安卓app，苹果app，网页、各类平台的小程序）vant、colorUI
+    15.typescript
+    16.vue3.0 + ts + Element Plus
+    17.各类框架aos.js......
+    18.（2019）鸿蒙os系统 4.0 + ArkTS=ts + nodejs环境
+    鸿蒙1.0、鸿蒙2.0语言是java（怕被告）
+    鸿蒙4.0--》ArkTS + nodejs环境
+
+    后端语言：
+        java(大头）/python（公司少）/go（谷歌）/php/C#/nodejs/net...
+    
+    有基础，能做东西，有vue，小程序，uniapp这一类框架的项目经验的
+    自己找工作，指导简历、面试技巧 ---》找老师
+  -->
